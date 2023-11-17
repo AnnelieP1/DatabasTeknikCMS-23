@@ -10,15 +10,23 @@ namespace Assignment.Entities;
 internal class AddressEntity
 {
     [Key]
-    public int AddressId { get; set; }
+    public int Id { get; set; }
+    
     [Required]
     public string StreetName { get; set; } = null!;
+    
     [Required]
     public int? StreetNumber { get; set; }
     
     public string PostalCode { get; set; } = null!;
+    
     [Required]
     public string City { get; set; } = null!;
-    [Required]
-    public ICollection<CustomerEntity> Customers { get; set; } = new List<CustomerEntity>(); 
+
+    public ICollection<CustomerEntity> Customers { get; set; } = new List<CustomerEntity>();
+
+    public static implicit operator AddressEntity(bool v)
+    {
+        throw new NotImplementedException();
+    }
 }

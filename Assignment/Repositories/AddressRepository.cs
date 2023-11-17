@@ -15,4 +15,13 @@ internal class AddressRepository : Repo<AddressEntity>
 
     }
 
+    internal Task<AddressEntity> CreateAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal Task<AddressEntity> GetAsync(Func<object, bool> value)
+    {
+        throw new NotImplementedException();
+    }
 }

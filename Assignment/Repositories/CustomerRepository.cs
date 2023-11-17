@@ -14,5 +14,25 @@ namespace Assignment.Repositories
         {
 
         }
+
+        internal Task<CustomerEntity> CreateAsync(CustomerEntity customerEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task<bool> ExistsAsync(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task<IEnumerable<object>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task GettAllAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
