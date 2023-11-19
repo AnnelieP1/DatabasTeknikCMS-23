@@ -10,18 +10,11 @@ namespace Assignment.Repositories;
 
 internal class AddressRepository : Repo<AddressEntity>
 {
-    public AddressRepository(DataContext dataContext) : base(dataContext)
+    private readonly DataContext _context;
+    public AddressRepository(DataContext context) : base(context)
     {
-
+        _context = context;
     }
 
-    internal Task<AddressEntity> CreateAsync()
-    {
-        throw new NotImplementedException();
-    }
 
-    internal Task<AddressEntity> GetAsync(Func<object, bool> value)
-    {
-        throw new NotImplementedException();
-    }
 }

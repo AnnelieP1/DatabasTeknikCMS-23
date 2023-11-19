@@ -21,6 +21,8 @@ internal class Address
     
     public string City { get; set; } = null!;
 
-    
-
+    internal static object ToListAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

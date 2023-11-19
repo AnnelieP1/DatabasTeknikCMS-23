@@ -14,9 +14,9 @@ internal class AddressEntity
     
     [Required]
     public string StreetName { get; set; } = null!;
-    
+
     [Required]
-    public int? StreetNumber { get; set; }
+    public string StreetNumber { get; set; } = null!;
     
     public string PostalCode { get; set; } = null!;
     
@@ -25,8 +25,4 @@ internal class AddressEntity
 
     public ICollection<CustomerEntity> Customers { get; set; } = new List<CustomerEntity>();
 
-    public static implicit operator AddressEntity(bool v)
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -25,14 +25,18 @@ internal class MainMenu
             Console.WriteLine("HuvudMeny");
             Console.WriteLine("----------------");
             Console.WriteLine("1. Skapa ny kund");
-            Console.WriteLine("Välj menyval 1 för att komma till skapa kund");
+            Console.WriteLine("2. Visa alla kunder");
+            Console.Write("Välj menyval 1 för att komma till skapa kund: ");
 
             var option = Console.ReadLine();
 
             switch (option)
             {
                 case "1":
-                    await _customerMenu.CreateCustomers();
+                    await _customerMenu.CreateAsync();
+                    break;
+                    case "2":
+                    await _customerMenu.GetAllAsync();
                     break;
             }
 

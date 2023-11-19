@@ -1,8 +1,13 @@
-﻿using Assignment.Contexts;
+﻿using Aspose.Pdf;
+using Assignment.Contexts;
 using Assignment.Entities;
+using Assignment.Models;
+using Assignment.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,29 +15,17 @@ namespace Assignment.Repositories
 {
     internal class CustomerRepository : Repo<CustomerEntity>
     {
-        public CustomerRepository(DataContext dataContext) : base(dataContext)
+        private readonly DataContext _context;
+        public CustomerRepository(DataContext context) : base(context)
         {
-
+            _context = context; 
         }
 
-        internal Task<CustomerEntity> CreateAsync(CustomerEntity customerEntity)
+        public override async Task<IEnumerable<CustomerEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Customers.Include(x => x.Address).ToListAsync();
+            
         }
-
-        internal Task<bool> ExistsAsync(Func<object, bool> value)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal Task<IEnumerable<object>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal Task GettAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

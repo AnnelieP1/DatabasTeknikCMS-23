@@ -1,4 +1,5 @@
-﻿using Assignment.Entities;
+﻿using Aspose.Pdf;
+using Assignment.Entities;
 using Assignment.Models;
 using Assignment.Repositories;
 using Assignment.Services;
@@ -13,20 +14,21 @@ namespace Assignment.Menus
     internal class CustomerMenu
     {
         private readonly CustomerService _customerService;
-
+       
         public CustomerMenu(CustomerService customerService)
         {
             _customerService = customerService;
+            
         }
 
-        public async Task CreateCustomers()
+        public async Task CreateCustomersAsync() 
         {
             Console.Clear();
             Console.WriteLine("Hantera Kunder");
             Console.WriteLine("-------------------");
             Console.WriteLine("1. Visa alla kunder");
             Console.WriteLine("2. Lägg till kunder");
-            Console.WriteLine("Välj ett av alternativen ovan: ");
+            Console.Write("Välj ett av alternativen ovan: ");
 
             var option = Console.ReadLine();
 
@@ -37,13 +39,35 @@ namespace Assignment.Menus
                     break;
 
                 case "2.":
-                    await CreateCustomerAsync();
+                    await CreateAsync();
                     break;
             }
         }
 
-        public async Task CreateCustomerAsync() 
+
+
+        public async Task ListAllAsync()
         {
+            Console.Clear();
+
+            var customers = await _customerService.GetAllAsync();
+            
+
+
+            foreach (var customer in customers)
+            {
+                Console.WriteLine($"{customer.FirstName} {customer.LastName} {customer.Email} {customer.Phonenumber}");
+                Console.WriteLine($"{customer.Address.StreetName} {customer.Address.StreetNumber} {customer.Address.PostalCode} {customer.Address.City}");
+                Console.WriteLine("");
+            }
+
+            Console.ReadKey();
+
+        }
+
+        public async Task CreateAsync()
+        {  
+        
             var form = new CustomerRegistrationForm();
 
             Console.Clear();
@@ -56,10 +80,14 @@ namespace Assignment.Menus
             Console.Write("Ange email: ");
             form.Email = Console.ReadLine()!;
 
+            Console.Write("Ange telefonnummer: ");
+            form.PhoneNumber = Console.ReadLine()!;
+
             Console.Write("Ange Gatunamn: ");
             form.StreetName = Console.ReadLine()!;
 
             Console.Write("Ange gatunummer: ");
+            form.StreetNumber = Console.ReadLine()!;
 
             Console.Write("Postal Code (xxx xx): ");
             form.PostalCode = Console.ReadLine()!;
@@ -72,26 +100,20 @@ namespace Assignment.Menus
                 Console.WriteLine("Kunden skapades.");
             else
                 Console.WriteLine("Kunde inte skapa kunden");
+            
 
-        }
-
-        public async Task ListAllAsync()
-        {
-            Console.Clear();
-
-            var customers = await _customerService.GetAllAsync(); 
-
-            foreach (var customer in customers) 
-            {
-                Console.WriteLine($"{customer.FirstName} {customer.LastName}");
-                Console.WriteLine($"{customer.StreetName}, {customer.Address.StreetNumber}, {customer.Address.PostalCode}, {customer.Address.City}");
-                Console.WriteLine("");
-            }
-
-            Console.ReadKey();
+            Console.WriteLine("Tryck enter för att fortsätta");
+            Console.ReadLine();
+            Console.Clear() ;
             
         }
         
+
+        public async Task GetAllAsync()
+        {
+             await _customerService.GetAllAsync();
+            
+        }
         
     }
 }

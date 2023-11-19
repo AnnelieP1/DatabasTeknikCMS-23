@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Assignment
 {
+    
     class Program
     {
         static async Task Main(string[] args)
@@ -29,7 +30,10 @@ namespace Assignment
                     services.AddScoped<SubCategoryRepository>();
 
                     services.AddScoped<CustomerService>();
-                    services.AddScoped<MenuService>();
+                    
+
+                    services.AddScoped<CustomerMenu>();
+                    services.AddScoped<MainMenu>();
 
                 })
                 .Build();
@@ -39,13 +43,16 @@ namespace Assignment
                 var services = scope.ServiceProvider;
             }
 
-            //Så här ska det se ut men det ska gå mot menuService istället
-            var menuService = host.Services.GetRequiredService<MenuService>();
-            //await menuService.StartAsync();
-            //await mainMenu.StartAsync();
+           
+            var mainMenu = host.Services.GetRequiredService<MainMenu>();
+           
+            await mainMenu.StartAsync();
+           
 
             await host.RunAsync();
             
         }
     }
 }
+
+        

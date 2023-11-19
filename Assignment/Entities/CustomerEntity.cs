@@ -22,7 +22,7 @@ internal class CustomerEntity
     
     [Required]
     public string Email { get; set; } = null!;
-    
+
     [Required]
     public string Phonenumber { get; set; } = null!;
 

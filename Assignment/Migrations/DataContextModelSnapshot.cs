@@ -102,9 +102,8 @@ namespace Assignment.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phonenumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Phonenumber")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
